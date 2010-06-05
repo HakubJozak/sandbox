@@ -6,7 +6,7 @@ class GameObject
   attr_reader :body
 
   def initialize(x,y)
-    @body = CP::Body.new(10,5)
+    @body = CP::Body.new(20,5)
     @body.p.x = x
     @body.p.y = y
     Space.instance.add_body(@body)
@@ -20,6 +20,8 @@ class Ball < GameObject
     super(x,y)
     @image = Gosu::Image.new(canvas, "images/ball.png", false)
     @shape = CP::Shape::Circle.new(@body, @image.width / 2, NULL_VECTOR)
+    @shape.u = 5
+    @shape.e = 10
     Space.instance.add_shape(@shape)
   end
 
@@ -29,19 +31,24 @@ class Ball < GameObject
   
 end
 
-class Stick < GameObject
+class Stick
   def initialize(x,y, color = Gosu::blue)
-    super(x,y)
+    @body = CP::Body.new(1.0 / 0.0, 1.0 / 0.0)
+    @body.p.x, @body.p.y, @color = x, y, color
+
     @size = 30
-    @color = color
     @shape = CP::Shape::Segment.new( @body, CP::Vec2.new(-@size,0), CP::Vec2.new(@size,0), 1)
-    space = Space.instance
-    space.add_body(@body)
-    space.add_shape(@shape)
+    @shape.u = 5
+    @body.a = Math::PI/4
+
+    Space.instance.add_static_shape(@shape)
   end
 
   def draw(canvas)
-    p = @body.p
-    canvas.line(p.x - @size, p.y, p.x + @size, p.y, @color)
+    p = @body.p    
+    a = @body.a
+    dx = @size * Math::sin(a)
+    dy = @size * Math::cos(a)
+    canvas.line(p.x - dx, p.y - dy, p.x + dx, p.y + dy, @color)
   end
 end

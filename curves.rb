@@ -18,7 +18,7 @@ class Space < CP::Space
 
   def initialize
     super
-    self.gravity = CP::Vec2.new(0,9.8)
+    self.gravity = CP::Vec2.new(0,90)
   end
 end
 
@@ -30,9 +30,7 @@ class CurveGame < Gosu::Window
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "Curve"
-    @game_objects = [ Stick.new(300,200,Gosu::green), 
-                      Stick.new(280,200,Gosu::red),
-                      Ball.new(300,100,self) ]
+    @game_objects = [ Stick.new(280,200,Gosu::green), Ball.new(280,100,self) ]
 
     # Time increment over which to apply a physics "step" ("delta t")
     @dt = (1.0/60.0)
