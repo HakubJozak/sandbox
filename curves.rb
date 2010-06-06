@@ -3,6 +3,10 @@ require 'gosu'
 require 'chipmunk'
 require 'singleton'
 require './game_object'
+require './stick'
+require './track'
+require './mouse'
+
 
 
 
@@ -30,32 +34,43 @@ class CurveGame < Gosu::Window
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "Curve"
-    @game_objects = [ Stick.new(280,200,Gosu::green), Ball.new(280,100,self) ]
+    
+    # Game objects
+    @track = Track.new
+    @mouse = Mouse.new(self, @track)
+    @game_objects = [ Ball.new(280,100,self), Ball.new(100,100,self) ]
+    @game_objects << @mouse << @track
 
-    # Time increment over which to apply a physics "step" ("delta t")
+    # Game utilities
+    @running = false
+
+    # Physics
     @dt = (1.0/60.0)
   end
 
-  def self.painter
-    instance
-  end
-
   def update
-    @game_objects.each do |o|
-      #o.body.apply_force(GRAVITY * o.body.m,NULL_VECTOR)
-    end
+    # @game_objects.each do |o|
+    #   o.body.apply_force(GRAVITY * o.body.m,NULL_VECTOR)
+    # end
 
     # true if button_down? Gosu::KbUp
-    Space.instance.step(@dt)
+    Space.instance.step(@dt) if @running
   end
 
   def draw
     @game_objects.each { |o| o.draw(self) }
   end
 
+  def toggle_pause
+    @running = !@running
+  end
+
   def button_down(id)
-    if id == Gosu::KbEscape then
-      close
+    case id
+    when Gosu::KbEscape then close      
+    when Gosu::MsLeft then @mouse.left_click
+    when Gosu::MsRight then @mouse.right_click
+    when Gosu::KbSpace then toggle_pause
     end
   end
 

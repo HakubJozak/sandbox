@@ -26,29 +26,7 @@ class Ball < GameObject
   end
 
   def draw(canvas)
-    @image.draw_rot(@body.p.x, @body.p.y, 0, @body.a)
+    @image.draw_rot(@body.p.x, @body.p.y, 0, @body.a.radians_to_gosu)
   end
   
-end
-
-class Stick
-  def initialize(x,y, color = Gosu::blue)
-    @body = CP::Body.new(1.0 / 0.0, 1.0 / 0.0)
-    @body.p.x, @body.p.y, @color = x, y, color
-
-    @size = 30
-    @shape = CP::Shape::Segment.new( @body, CP::Vec2.new(-@size,0), CP::Vec2.new(@size,0), 1)
-    @shape.u = 5
-    @body.a = Math::PI/4
-
-    Space.instance.add_static_shape(@shape)
-  end
-
-  def draw(canvas)
-    p = @body.p    
-    a = @body.a
-    dx = @size * Math::sin(a)
-    dy = @size * Math::cos(a)
-    canvas.line(p.x - dx, p.y - dy, p.x + dx, p.y + dy, @color)
-  end
 end
