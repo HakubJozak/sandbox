@@ -27,6 +27,15 @@ class Space < CP::Space
 end
 
 
+class DrawableComposite < Array
+  def draw(canvas)
+    each do |o|
+      o.draw(canvas)
+    end
+  end
+end
+
+
 
 class CurveGame < Gosu::Window
   include Singleton
@@ -38,8 +47,12 @@ class CurveGame < Gosu::Window
     # Game objects
     @track = Track.new
     @mouse = Mouse.new(self, @track)
-    @game_objects = [ Ball.new(280,100,self), Ball.new(100,100,self) ]
-    @game_objects << @mouse << @track
+
+    @balls = DrawableComposite.new
+    @balls << Ball.new(200,100,self) << Ball.new(380,100,self)
+
+    @game_objects = DrawableComposite.new
+    @game_objects << @mouse << @track << @balls
 
     # Game utilities
     @running = false
@@ -49,16 +62,12 @@ class CurveGame < Gosu::Window
   end
 
   def update
-    # @game_objects.each do |o|
-    #   o.body.apply_force(GRAVITY * o.body.m,NULL_VECTOR)
-    # end
-
     # true if button_down? Gosu::KbUp
     Space.instance.step(@dt) if @running
   end
 
   def draw
-    @game_objects.each { |o| o.draw(self) }
+    @game_objects.draw(self)
   end
 
   def toggle_pause
@@ -70,8 +79,22 @@ class CurveGame < Gosu::Window
     when Gosu::KbEscape then close      
     when Gosu::MsLeft then @mouse.left_click
     when Gosu::MsRight then @mouse.right_click
+    when Gosu::MsMiddle then @mouse.middle_click
     when Gosu::KbSpace then toggle_pause
+    when Gosu::KbReturn then reset_balls
     end
+  end
+
+  def add_ball(x,y)
+    @balls << Ball.new(x,y,self)    
+  end
+
+  def reset_balls
+    @balls.each do |ball|
+      ball.delete
+    end
+
+    @balls.clear
   end
 
   def line(x,y,x2,y2,color)

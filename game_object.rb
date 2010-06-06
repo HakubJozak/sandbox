@@ -29,4 +29,9 @@ class Ball < GameObject
     @image.draw_rot(@body.p.x, @body.p.y, 0, @body.a.radians_to_gosu)
   end
   
+  def delete
+    Space.instance.remove_shape(@shape)
+    Space.instance.remove_body(@body)
+  end
+  
 end

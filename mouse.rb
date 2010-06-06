@@ -23,6 +23,10 @@ class Mouse
     reset_builder
   end
 
+  def middle_click
+    @window.add_ball(x,y)
+  end
+
   private
 
   def build_point(x,y)
