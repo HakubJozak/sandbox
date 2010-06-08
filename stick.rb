@@ -1,3 +1,10 @@
+require 'yaml'
+require 'chipmunk'
+
+
+YAML_DOMAIN = "neorural.cz,2010"
+
+
 class Stick
 
   def initialize(from,to, options = {})
@@ -13,7 +20,13 @@ class Stick
     Space.instance.add_static_shape(@shape)
   end
 
+  def to_yaml(ops = {})
+    { :a => @from, :b => @to }.to_yaml(ops)
+  end
+
   def draw(canvas)
     canvas.line( @from.x, @from.y, @to.x, @to.y , @color)
   end
 end
+
+

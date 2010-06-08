@@ -1,3 +1,5 @@
+require "yaml"
+
 class Track
 
   def initialize
@@ -14,7 +16,10 @@ class Track
     end
   end
 
-  def save(file)
+  def save(filename)
+    f = File.new(filename, 'w')
+    f << YAML::dump(@parts)
+    f.close
   end
 
   def load(file)

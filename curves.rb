@@ -6,6 +6,8 @@ require './game_object'
 require './stick'
 require './track'
 require './mouse'
+require './ball'
+require './vec2.rb'
 
 
 
@@ -13,7 +15,7 @@ require './mouse'
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
 
-GRAVITY = CP::Vec2.new(0,9.8)
+GRAVITY = CP::Vec2.new(0,481.010)
 NULL_VECTOR = CP::Vec2.new(0.0, 0.0)
 
 
@@ -22,7 +24,7 @@ class Space < CP::Space
 
   def initialize
     super
-    self.gravity = CP::Vec2.new(0,90)
+    self.gravity = GRAVITY
   end
 end
 
@@ -82,6 +84,7 @@ class CurveGame < Gosu::Window
     when Gosu::MsMiddle then @mouse.middle_click
     when Gosu::KbSpace then toggle_pause
     when Gosu::KbReturn then reset_balls
+    when Gosu::KbF1 then @track.save('track.yml')
     end
   end
 
