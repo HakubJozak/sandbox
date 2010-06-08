@@ -2,10 +2,10 @@ require 'yaml'
 require 'chipmunk'
 
 
-YAML_DOMAIN = "neorural.cz,2010"
-
-
 class Stick
+  
+  attr_reader :from, :to
+  yaml_mapping 'stick', :from, :to
 
   def initialize(from,to, options = {})
     @from, @to = from, to
@@ -20,13 +20,15 @@ class Stick
     Space.instance.add_static_shape(@shape)
   end
 
-  def to_yaml(ops = {})
-    { :a => @from, :b => @to }.to_yaml(ops)
-  end
-
   def draw(canvas)
     canvas.line( @from.x, @from.y, @to.x, @to.y , @color)
   end
+
+end
+
+
+YAML::add_domain_type( YAML_DOMAIN, "stick" ) do |type, val|
+  Stick.new( val['from'], val['to'] )
 end
 
 

@@ -1,23 +1,3 @@
-require 'rubygems'
-require 'gosu'
-require 'chipmunk'
-require 'singleton'
-require './game_object'
-require './stick'
-require './track'
-require './mouse'
-require './ball'
-require './vec2.rb'
-
-
-
-
-SCREEN_WIDTH = 640
-SCREEN_HEIGHT = 480
-
-GRAVITY = CP::Vec2.new(0,481.010)
-NULL_VECTOR = CP::Vec2.new(0.0, 0.0)
-
 
 class Space < CP::Space
   include Singleton
@@ -84,7 +64,8 @@ class CurveGame < Gosu::Window
     when Gosu::MsMiddle then @mouse.middle_click
     when Gosu::KbSpace then toggle_pause
     when Gosu::KbReturn then reset_balls
-    when Gosu::KbF1 then @track.save('track.yml')
+    when Gosu::KbF1 then save('track.yml')
+    when Gosu::KbF2 then load('track.yml')
     end
   end
 
@@ -106,9 +87,21 @@ class CurveGame < Gosu::Window
     draw_line(offset_x + x , offset_y + y, color, offset_x + x2, offset_y + y2, color)
   end
 
+  def save(filename)
+    f = File.new(filename, 'w')
+    f << YAML::dump(@track)
+    f.close
+  end
+
+  def load(filename)
+    @game_objects.delete(@track)
+    @track = YAML::load(File.new(filename))
+    @game_objects << @track
+  end
+
+
 end
 
-window = CurveGame.instance.show
 
 
 

@@ -1,43 +1,19 @@
---- 
-- :a: 
-    x: 153.0
-    y: 215.0
-  :b: 
-    x: 424.0
-    y: 217.0
-- :a: 
-    x: 354.0
-    y: 253.0
-  :b: &id001 
-    x: 228.0
-    y: 276.0
-- :a: *id001
-  :b: &id002 
-    x: 149.0
-    y: 266.0
-- :a: *id002
-  :b: &id003 
-    x: 134.0
-    y: 225.0
-- :a: *id003
-  :b: 
-    x: 154.0
-    y: 215.0
-- :a: 
-    x: 157.0
-    y: 70.0
-  :b: &id004 
-    x: 292.0
-    y: 60.0
-- :a: *id004
-  :b: &id005 
-    x: 311.0
-    y: 131.0
-- :a: *id005
-  :b: &id006 
-    x: 490.0
-    y: 169.0
-- :a: *id006
-  :b: 
-    x: 501.0
-    y: 67.0
+--- !jakub.hozak,2010/track 
+parts: 
+- !jakub.hozak,2010/stick 
+  from: !jakub.hozak,2010/vec2 
+    x: 136.0
+    y: 325.0
+  to: &id001 !jakub.hozak,2010/vec2 
+    x: 268.0
+    y: 289.0
+- !jakub.hozak,2010/stick 
+  from: *id001
+  to: &id002 !jakub.hozak,2010/vec2 
+    x: 455.0
+    y: 361.0
+- !jakub.hozak,2010/stick 
+  from: *id002
+  to: !jakub.hozak,2010/vec2 
+    x: 539.0
+    y: 332.0

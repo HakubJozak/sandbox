@@ -1,4 +1,3 @@
-require 'node'
 require 'positioned'
 require 'chipmunk'
 

@@ -1,0 +1,6 @@
+YAML_DOMAIN = "jakub.hozak,2010"
+SCREEN_WIDTH = 640
+SCREEN_HEIGHT = 480
+
+GRAVITY = CP::Vec2.new(0,481.010)
+NULL_VECTOR = CP::Vec2.new(0.0, 0.0)
