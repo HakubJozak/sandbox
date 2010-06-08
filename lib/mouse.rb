@@ -1,7 +1,7 @@
 class Mouse
 
-  def initialize(window, track)
-    @window, @track = window, track
+  def initialize(window, game)
+    @window, @game = window, game
     @last_click = nil
     @mouse_image = Gosu::Image.new(window, "images/mouse.png", false)
   end
@@ -32,7 +32,7 @@ class Mouse
   def build_point(x,y)
     if @last_click
       current = CP::Vec2.new(x,y)
-      @track << Stick.new(@last_click, current)
+      @game.track << Stick.new(@last_click, current)
       @last_click = current
     else
       @last_click = CP::Vec2.new(x,y)

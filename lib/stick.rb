@@ -20,6 +20,11 @@ class Stick
     Space.instance.add_static_shape(@shape)
   end
 
+  def delete
+    Space.instance.remove_static_shape(@shape)
+    Space.instance.remove_body(@body)
+  end
+
   def draw(canvas)
     canvas.line( @from.x, @from.y, @to.x, @to.y , @color)
   end

@@ -21,6 +21,8 @@ end
 
 class CurveGame < Gosu::Window
   include Singleton
+  
+  attr_reader :track
 
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
@@ -28,7 +30,7 @@ class CurveGame < Gosu::Window
     
     # Game objects
     @track = Track.new
-    @mouse = Mouse.new(self, @track)
+    @mouse = Mouse.new(self, self)
 
     @balls = DrawableComposite.new
     @balls << Ball.new(200,100,self) << Ball.new(380,100,self)
@@ -94,6 +96,7 @@ class CurveGame < Gosu::Window
   end
 
   def load(filename)
+    @track.delete
     @game_objects.delete(@track)
     @track = YAML::load(File.new(filename))
     @game_objects << @track

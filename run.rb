@@ -10,7 +10,7 @@ $: << File.join(File.dirname(__FILE__), "/lib")
 require 'game_object'
 
 Dir['lib/*.rb'].each do |file|
-  require file
+  require File.basename(file)
   puts "Loaded #{file}"
 end
 

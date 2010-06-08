@@ -12,6 +12,10 @@ class Track
     @parts << part if part
   end
 
+  def delete
+    @parts.each { |p| p.delete }
+  end
+
   def draw(canvas)
     @parts.each do |part|
       part.draw(canvas)
