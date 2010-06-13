@@ -5,11 +5,11 @@ gem 'gosu', "0.7.20"
 gem 'chipmunk'
 
 
-#group :debug do
+group :debug do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'awesome_print', :require => 'ap'
-#end
+end
 
-#group :test do
+group :test do
   gem 'autotest'
-#end
+end

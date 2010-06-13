@@ -2,11 +2,9 @@
 
 require 'rubygems'
 require 'bundler'
-Bundler.setup
+Bundler.require(:default, :debug)
 require 'singleton'
 
-
-debugger
 
 $: << File.join(File.dirname(__FILE__), "/lib")
 
