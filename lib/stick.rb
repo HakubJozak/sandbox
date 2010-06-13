@@ -14,7 +14,7 @@ class Stick
 #    @body.p = from + ((to - from).length / 2.0)
     @body.p = CP::Vec2.new(0,0)
 
-    @shape = CP::Shape::Segment.new( @body, from, to, 1)
+    @shape = CP::Shape::Segment.new( @body, from, to, 20)
     @shape.u = 5
     @shape.e = 0.5
     @color = Gosu::black
@@ -27,7 +27,7 @@ class Stick
   end
 
   def draw(canvas)
-    canvas.line( @from.x, @from.y, @to.x, @to.y , @color)
+    canvas.line( @from.x, @from.y, @to.x, @to.y , @color, Z_GAME_OBJECTS)
   end
 
 end

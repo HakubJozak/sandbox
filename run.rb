@@ -1,13 +1,15 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'chipmunk'
-require 'gosu'
+require 'bundler'
+Bundler.setup
 require 'singleton'
+
+
+debugger
 
 $: << File.join(File.dirname(__FILE__), "/lib")
 
-require 'game_object'
 
 Dir['lib/*.rb'].each do |file|
   require File.basename(file)

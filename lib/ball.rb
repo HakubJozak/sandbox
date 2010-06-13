@@ -16,13 +16,13 @@ class Ball
   end
 
   def draw(canvas)
-    @image.draw_rot(@body.p.x, @body.p.y, 0, @body.a.radians_to_gosu)
+    @image.draw_rot(@body.p.x, @body.p.y, 0, @body.a.radians_to_gosu, Z_GAME_OBJECTS)
   end
 
   def pick_image
     case rand(2)
-      when 0: "images/yellow_ball.png"
-      when 1: "images/blue_ball.png"
+      when 0 then "images/yellow_ball.png"
+      when 1 then "images/blue_ball.png"
     end
   end
   

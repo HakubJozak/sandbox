@@ -1,6 +1,6 @@
 require 'chipmunk'
 require 'yaml'
-
+require 'yaml_serializer'
 
 class CP::Vec2
   yaml_mapping 'vec2', :x, :y

@@ -3,6 +3,8 @@ require "yaml"
 class Track
 
   yaml_mapping 'track', :parts
+  attr_reader :parts
+  private :parts
 
   def initialize(parts = [])
     @parts = parts
@@ -22,12 +24,6 @@ class Track
     end
   end
 
-  private
-
-  def parts
-    @parts
-  end
-  
 end
 
 

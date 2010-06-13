@@ -1,4 +1,5 @@
-class DrawableComposite < Array
+module Drawable
+
   def draw(canvas)
     each do |o|
       o.draw(canvas)
