@@ -1,6 +1,6 @@
-require 'chipmunk'
+require 'game_object'
 
-class Ball
+class Ball < GameObject
   
   def initialize(x,y, canvas)
     @body = CP::Body.new(20,5)
@@ -12,11 +12,16 @@ class Ball
     @shape = CP::Shape::Circle.new(@body, @image.width / 2, NULL_VECTOR)
     @shape.u = 5
     @shape.e = 1.02
+    @shape.obj = self
     Space.instance.add_shape(@shape)
   end
 
   def draw(canvas)
-    @image.draw_rot(@body.p.x, @body.p.y, 0, @body.a.radians_to_gosu, Z_GAME_OBJECTS)
+    @image.draw_rot(@body.p.x, @body.p.y, Z_GAME_OBJECTS, @body.a.radians_to_gosu)
+  end
+
+  def draw_bb(canvas)
+    canvas.draw_bounding_box(@shape.bb)
   end
 
   def pick_image
@@ -25,7 +30,7 @@ class Ball
       when 1 then "images/blue_ball.png"
     end
   end
-  
+
   def delete
     Space.instance.remove_shape(@shape)
     Space.instance.remove_body(@body)

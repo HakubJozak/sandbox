@@ -2,19 +2,16 @@ class DebugInfo
   
   def initialize(window)
     @font = Gosu::Font.new(window, Gosu::default_font_name, 20)
-    reset
+    @selected = nil
   end
 
-  def <<(text)
-    @text += text.strip + "\n"
+  def object_selected(selected)
+    @selected = selected
   end
 
-  def reset
-    @text = "\n"
-  end
   
   def draw(canvas)
-    lines = @text.lines
+    lines = @selected.nil? ? "No object selected" : @selected.info
     chars = lines.max_by { |l| l.length }
 
     canvas.filled_rectangle(0,0, 14 + @font.text_width(chars), 17 * lines.count, Gosu::Color.new(0x5c5c5c22), Z_DEBUG )

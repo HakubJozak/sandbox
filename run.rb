@@ -3,8 +3,8 @@
 require 'singleton'
 require 'rubygems'
 require 'bundler'
-require 'chipmunk'
-require 'gosu'
+Bundler.require
+
 
 
 

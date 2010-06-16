@@ -2,8 +2,18 @@
 parts: 
 - !jakub.hozak,2010/stick 
   from: !jakub.hozak,2010/vec2 
-    x: 134.0
-    y: 384.0
+    x: 106.0
+    y: 335.0
+  to: &id001 !jakub.hozak,2010/vec2 
+    x: 316.0
+    y: 407.0
+- !jakub.hozak,2010/stick 
+  from: *id001
+  to: &id002 !jakub.hozak,2010/vec2 
+    x: 490.0
+    y: 415.0
+- !jakub.hozak,2010/stick 
+  from: *id002
   to: !jakub.hozak,2010/vec2 
-    x: 550.0
-    y: 84.0
+    x: 592.0
+    y: 330.0

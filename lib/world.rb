@@ -13,13 +13,16 @@ class World
     @objects << obj if obj
   end
 
+  def update
+  end
+  
   def draw(canvas)
     @objects.each { |o| o.draw(canvas) }
+    @track.draw(canvas)
   end
 
   def info
-    "Objects: #{@objects.count}\n" +
-    "Track: #{@track}\n"
+    [ "Objects: #{@objects.count}" ]
   end
   
   # Remove all game objects
@@ -45,7 +48,6 @@ class World
   def load_track(filename)
     delete_track
     @track = YAML::load(File.new(filename)) rescue Track.new
-    @world << @track
   end
   
 
