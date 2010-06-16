@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
+require 'singleton'
 require 'rubygems'
 require 'bundler'
-Bundler.require(:default, :debug)
-require 'singleton'
+require 'chipmunk'
+require 'gosu'
+
 
 
 $: << File.join(File.dirname(__FILE__), "/lib")

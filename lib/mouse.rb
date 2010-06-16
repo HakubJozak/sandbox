@@ -1,9 +1,12 @@
 class Mouse
 
-  def initialize(window, game)
-    @window, @game = window, game
+  attr_accessor :world, :window
+  
+  def initialize(window, world)
+    @window, @world = window, world
     @last_click = nil
     @mouse_image = Gosu::Image.new(window, "images/mouse.png", false)
+    @info = DebugInfo.new(window)
   end
 
   def x() @window.mouse_x end
@@ -12,7 +15,11 @@ class Mouse
   def draw(canvas)
     canvas.line( @last_click.x, @last_click.y, x, y , Gosu::red) if @last_click
     size = @mouse_image.width / 2
-    @mouse_image.draw(x - size, y - size, 10)    
+    @mouse_image.draw(x - size, y - size, Z_MOUSE)
+
+    @info.reset
+    @info << @world.info
+    @info.draw(canvas)
   end
 
   def left_click
@@ -24,7 +31,7 @@ class Mouse
   end
 
   def middle_click
-    @window.add_ball(x,y)
+    @world << Seesaw.new(x,y,self)
   end
 
   private
@@ -32,7 +39,7 @@ class Mouse
   def build_point(x,y)
     if @last_click
       current = CP::Vec2.new(x,y)
-      @game.track << Stick.new(@last_click, current)
+      @world.track << Stick.new(@last_click, current)
       @last_click = current
     else
       @last_click = CP::Vec2.new(x,y)

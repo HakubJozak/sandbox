@@ -1,18 +1,23 @@
 class DebugInfo
-  attr_accessor :text
   
   def initialize(window)
     @font = Gosu::Font.new(window, Gosu::default_font_name, 20)
-    @text = "\n"
+    reset
   end
 
   def <<(text)
     @text += text.strip + "\n"
   end
+
+  def reset
+    @text = "\n"
+  end
   
   def draw(canvas)
     lines = @text.lines
-    canvas.filled_rectangle(0,0,250,lines.count * 17, Gosu::Color.new(0x11111122), Z_DEBUG)
+    chars = lines.max_by { |l| l.length }
+
+    canvas.filled_rectangle(0,0, 14 + @font.text_width(chars), 17 * lines.count, Gosu::Color.new(0x5c5c5c22), Z_DEBUG )
 
     lines.each_with_index do |line,i|
       @font.draw(line, 5,16 * i, Z_DEBUG,1,1,Gosu::black)      
@@ -25,8 +30,7 @@ class DebugInfo
   
   def draw_grid(canvas)
     size = 20
-    #c = Gosu::Color.new(0xc8feffff)
-    c = Gosu::blue
+    c = Gosu::Color.new(0xcececeff)
     w = SCREEN_WIDTH / size
     h = SCREEN_HEIGHT / size
 

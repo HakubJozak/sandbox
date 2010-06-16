@@ -1,30 +1,53 @@
 require 'drawable'
 
 class World
-  include 'drawable'
-
-  def initialize
+  attr_reader :track
+  
+  def initialize(track = nil)
     @objects = []
+    @track = track || Track.new
   end
   
-  def each(*args)
-    @objects.each(args)    
+  # Add game object to the world.
+  def << (obj)
+    @objects << obj if obj
   end
 
-  def reset_track
-    if @track
-      @track.delete
-      @world.delete(@track)
-    end
+  def draw(canvas)
+    @objects.each { |o| o.draw(canvas) }
   end
 
+  def info
+    "Objects: #{@objects.count}\n" +
+    "Track: #{@track}\n"
+  end
+  
+  # Remove all game objects
   def delete_all
-    @balls.each do |ball|
-      ball.delete
+    @objects.each do |o|
+      o.delete     
     end
 
-    @balls.clear
+    @objects.clear
   end
+
+  def delete_track
+    @track.delete
+    @track = Track.new
+  end
+  
+  def save_track(filename)
+    f = File.new(filename, 'w')
+    f << YAML::dump(@track)
+    f.close
+  end
+
+  def load_track(filename)
+    delete_track
+    @track = YAML::load(File.new(filename)) rescue Track.new
+    @world << @track
+  end
+  
 
 
 end
