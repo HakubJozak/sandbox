@@ -10,6 +10,7 @@ class Space < CP::Space
     super
     self.gravity = GRAVITY
     self.elastic_iterations = 1
+    self.damping = 0.7
   end
 
   def info

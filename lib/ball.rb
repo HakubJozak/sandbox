@@ -1,7 +1,7 @@
 require 'game_object'
 
 class Ball < GameObject
-  
+
   def initialize(x,y, canvas)
     @body = CP::Body.new(20,5)
     @body.p.x = x
@@ -11,7 +11,7 @@ class Ball < GameObject
     @image = Gosu::Image.new(canvas, pick_image, false)
     @shape = CP::Shape::Circle.new(@body, @image.width / 2, NULL_VECTOR)
     @shape.u = 5
-    @shape.e = 1.02
+    @shape.e = 1.5
     @shape.obj = self
     Space.instance.add_shape(@shape)
   end

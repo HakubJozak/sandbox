@@ -5,7 +5,7 @@ class Seesaw < GameObject
     w = @board_image.width * 0.5
     h = @board_image.height * 0.5
 
-    @board = CP::Body.new(20, 20)
+    @board = CP::Body.new(20, 1000)
     @board.p.x = x
     @board.p.y = y
     @board_shape = CP::Shape::Poly.new( @board, 
@@ -16,7 +16,7 @@ class Seesaw < GameObject
                                         CP::Vec2.new(0,0))
     @board_shape.obj = self
     @board_shape.e = 0.00001
-    @board_shape.u = 0.00001
+    @board_shape.u = 10000
     Space.instance.add_body(@board)
     Space.instance.add_shape(@board_shape)
 

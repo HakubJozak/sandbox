@@ -11,7 +11,7 @@ class DebugInfo
 
   
   def draw(canvas)
-    lines = @selected.nil? ? "No object selected" : @selected.info
+    lines = @selected.nil? ? ["No object selected"] : @selected.info
     chars = lines.max_by { |l| l.length }
 
     canvas.filled_rectangle(0,0, 14 + @font.text_width(chars), 17 * lines.count, Gosu::Color.new(0x5c5c5c22), Z_DEBUG )

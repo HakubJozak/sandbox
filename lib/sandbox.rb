@@ -1,4 +1,4 @@
-class CurveGame < Gosu::Window
+class Sandbox < Gosu::Window
   include Singleton
   
   attr_reader :track
@@ -10,6 +10,7 @@ class CurveGame < Gosu::Window
     @world = World.new
     @mouse = Mouse.new(self, @world)
     @world << Seesaw.new(320, 280, self)
+    @world.load_track('track.yml')    
 
     @info = DebugInfo.new(self)
     @info.object_selected(Space.instance)
@@ -29,8 +30,6 @@ class CurveGame < Gosu::Window
     if selected = @mouse.points_on
       selected.draw_bb(self)
     end
-
-
     
     @world.draw(self)
     @mouse.draw(self)

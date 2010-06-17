@@ -15,7 +15,7 @@ class Stick
     @body.p = CP::Vec2.new(0,0)
 
     @shape = CP::Shape::Segment.new( @body, from, to, 1)
-    @shape.u = 0.00001
+    @shape.u = 5
     @shape.e = 0.001
     @color = Gosu::black
     Space.instance.add_static_shape(@shape)

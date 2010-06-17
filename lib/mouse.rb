@@ -19,14 +19,8 @@ class Mouse
   end
   
   def draw(canvas)
-    if @is_over
-      box = @is_over.bb
-      c = Gosu::red
-      @window.draw_quad( box.l, box.t, c,
-                         box.r, box.t, c,
-                         box.l, box.b, c,
-                         box.r, box.b, c,
-                         Z_GAME_OBJECTS)
+    [ points_on, @selected ].compact.each do |o|
+      o.draw_bb(canvas)
     end
     
     canvas.line( @last_click.x, @last_click.y, x, y , Gosu::red) if @last_click
@@ -35,15 +29,19 @@ class Mouse
   end
 
   def left_click
-    if @selected = points_on
-      @selection_listener.object_selected(@selected) if @selection_listener
+    if under_cursor = points_on
+      select(under_cursor)
     else
       build_point(x, y)
     end
   end
 
   def right_click
-    reset_builder
+    if @last_click
+      reset_builder
+    else
+      select(nil)
+    end
   end
 
   def middle_click
@@ -52,6 +50,11 @@ class Mouse
   end
 
   private
+
+  def select(obj)
+    @selected = obj
+    @selection_listener.object_selected(@selected) if @selection_listener    
+  end
 
   def build_point(x,y)
     if @last_click
