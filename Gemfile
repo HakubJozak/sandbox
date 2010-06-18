@@ -3,7 +3,7 @@ source :gemcutter
 
 gem 'gosu', "0.7.20"
 gem 'chipmunk'
-gem 'chingu'
+#gem 'chingu'
 
 
 gem 'awesome_print', :require => 'ap'

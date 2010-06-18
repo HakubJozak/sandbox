@@ -23,7 +23,6 @@ class Gui
       @pressed = @widgets.find { |w| w.contains?(mouse.x,mouse.y) }
 
       if @pressed
-        p '!!!'
         @pressed.button_down(key)
         return true
       end

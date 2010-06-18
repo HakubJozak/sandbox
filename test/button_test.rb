@@ -19,7 +19,8 @@ class ButtonTest <  MiniTest::Unit::TestCase
     assert @clicked, "Button not registering clicks!"
   end
 
-  def test_button_toggle
+  def test_contains?
+    assert @button.contains(20,20)
   end
   
 end

@@ -3,13 +3,23 @@ class Sandbox < Gosu::Window
   
   attr_reader :track
 
+  def +(a)
+  end
+
+  def -(a)
+  end
+  
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "Chipmunk Sandbox"
 
-    Button.new(self, 100, 100, 'Click Me!')
+    b = Button.new(self, 100, 100, 'Click Me!') { }
+    pm = PlusMinus.new(self, 100, 140, self, '') { }
+   
+    @gui = Gui.new
+    @gui.add_widget(b)
+    @gui.add_widget(pm)
     
-    @gui = Gui.new.add_widget(b)
     @world = World.new
     @mouse = Mouse.new(self, @world)
     @world << Seesaw.new(320, 280, self)

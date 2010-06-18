@@ -5,6 +5,7 @@ require 'redgreen'
 
 require 'gosu'
 require 'chipmunk'
+require './lib/widget.rb'
 require './lib/button.rb'
 
 
