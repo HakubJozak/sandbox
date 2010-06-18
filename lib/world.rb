@@ -1,4 +1,3 @@
-require 'drawable'
 
 class World
   attr_reader :track

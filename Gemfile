@@ -15,5 +15,6 @@ group :debug do
 end
 
 group :test do
-#  gem 'autotest'
+  gem 'minitest'
+  gem 'mynyml-redgreen'
 end

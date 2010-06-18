@@ -6,7 +6,10 @@ class Sandbox < Gosu::Window
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "Chipmunk Sandbox"
+
+    Button.new(self, 100, 100, 'Click Me!')
     
+    @gui = Gui.new.add_widget(b)
     @world = World.new
     @mouse = Mouse.new(self, @world)
     @world << Seesaw.new(320, 280, self)
@@ -30,10 +33,12 @@ class Sandbox < Gosu::Window
     if selected = @mouse.points_on
       selected.draw_bb(self)
     end
-    
+
     @world.draw(self)
     @mouse.draw(self)
-    @info.draw(self)
+    # @info.draw(self)
+
+    @gui.draw(self)
   end
 
   def toggle_pause
@@ -41,17 +46,24 @@ class Sandbox < Gosu::Window
   end
 
   def button_down(key)
-    case key
-    when Gosu::KbEscape then close      
-    when Gosu::MsLeft then @mouse.left_click
-    when Gosu::MsRight then @mouse.right_click
-    when Gosu::MsMiddle then @mouse.middle_click
-    when Gosu::KbSpace then toggle_pause
-    when Gosu::KbReturn then @world.delete_all
-    when Gosu::KbF1 then @world.save_track('track.yml')
-    when Gosu::KbF2 then @world.load_track('track.yml')
-    when Gosu::KbF3 then @world.delete_track
+    # Take care of the key unless some GUI widget handles it
+    unless @gui.button_down(@mouse, key)
+      case key
+      when Gosu::KbEscape then close      
+      when Gosu::MsLeft then @mouse.left_click
+      when Gosu::MsRight then @mouse.right_click
+      when Gosu::MsMiddle then @mouse.middle_click
+      when Gosu::KbSpace then toggle_pause
+      when Gosu::KbReturn then @world.delete_all
+      when Gosu::KbF1 then @world.save_track('track.yml')
+      when Gosu::KbF2 then @world.load_track('track.yml')
+      when Gosu::KbF3 then @world.delete_track
+      end
     end
+  end
+
+  def button_up(key)
+    @gui.button_up(@mouse, key)
   end
 
   def draw_bounding_box(box)
