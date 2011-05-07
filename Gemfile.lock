@@ -1,0 +1,20 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    awesome_print (0.3.2)
+    chipmunk (5.3.4.0)
+    gosu (0.7.31)
+    minitest (2.1.0)
+    mynyml-redgreen (0.7.1)
+      term-ansicolor (>= 1.0.4)
+    term-ansicolor (1.0.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  awesome_print
+  chipmunk
+  gosu
+  minitest
+  mynyml-redgreen
