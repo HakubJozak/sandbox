@@ -1,5 +1,3 @@
-require 'constants'
-
 class Object
 
   def self.yaml_mapping(name, *attrs)

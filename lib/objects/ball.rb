@@ -1,5 +1,3 @@
-require 'game_object'
-
 class Ball < GameObject
 
   def initialize(x,y, canvas)

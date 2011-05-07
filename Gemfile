@@ -1,13 +1,9 @@
 # -*- mode: Ruby; tab-width: 4; -*-
 source :gemcutter
 
+gem 'require_all'
 gem 'gosu'
 gem 'chipmunk'
-
-group :editor do
-end
-
-
 
 
 group :debug do
