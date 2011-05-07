@@ -1,1 +1,7 @@
-Chipmunk Sandbox
+# Chipmunk Sandbox
+
+A simple point and click GUI application to create Chipmunk physics driven objects and test changes of their variables like mass or moment of intertia.
+
+## Flaws
+
+- no tests - this is just a quick hacking way of testing game objects, no stability intended, ehm
